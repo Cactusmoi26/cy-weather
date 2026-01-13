@@ -1,6 +1,7 @@
-from pydantic import BaseModel, Field
-from typing import List, Optional
 from datetime import datetime
+from typing import List, Optional
+
+from pydantic import BaseModel, Field
 
 
 class WeatherRequest(BaseModel):
@@ -14,9 +15,7 @@ class CurrentWeatherData(BaseModel):
     """Données météo actuelles"""
 
     temperature: float = Field(..., description="Température en degrés Celsius")
-    feels_like: float = Field(
-        ..., description="Température ressentie en degrés Celsius"
-    )
+    feels_like: float = Field(..., description="Température ressentie en degrés Celsius")
     humidity: float = Field(..., description="Humidité en pourcentage")
     pressure: float = Field(..., description="Pression atmosphérique en hPa")
     wind_speed: float = Field(..., description="Vitesse du vent en m/s")
@@ -45,9 +44,7 @@ class DailyForecastData(BaseModel):
     wind_speed: float = Field(..., description="Vitesse du vent en m/s")
     description: str = Field(..., description="Description des conditions météo")
     icon: str = Field(..., description="Code de l'icône météo")
-    precipitation_probability: Optional[float] = Field(
-        None, description="Probabilité de précipitations en pourcentage"
-    )
+    precipitation_probability: Optional[float] = Field(None, description="Probabilité de précipitations en pourcentage")
 
 
 class ForecastResponse(BaseModel):
@@ -55,6 +52,4 @@ class ForecastResponse(BaseModel):
 
     city: str = Field(..., description="Nom de la ville")
     country: str = Field(..., description="Code pays")
-    forecast: List[DailyForecastData] = Field(
-        ..., description="Liste des prévisions pour les 7 prochains jours"
-    )
+    forecast: List[DailyForecastData] = Field(..., description="Liste des prévisions pour les 7 prochains jours")

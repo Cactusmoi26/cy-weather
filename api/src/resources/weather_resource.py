@@ -1,9 +1,10 @@
-from fastapi import APIRouter, HTTPException, Query
 from typing import Optional
-from src.models.Weather import WeatherRequest, WeatherResponse, ForecastResponse
-from src.services.weather_service import weather_service
-import httpx
 
+import httpx
+from fastapi import APIRouter, HTTPException, Query
+
+from src.models.Weather import ForecastResponse, WeatherResponse
+from src.services.weather_service import weather_service
 
 # Router pour les endpoints météo
 router = APIRouter(prefix="/weather", tags=["Weather"])
@@ -12,9 +13,7 @@ router = APIRouter(prefix="/weather", tags=["Weather"])
 @router.get("/current", response_model=WeatherResponse)
 async def get_current_weather(
     city: str = Query(..., description="Nom de la ville", min_length=1),
-    country_code: Optional[str] = Query(
-        None, description="Code pays ISO (ex: FR, US)", max_length=2
-    ),
+    country_code: Optional[str] = Query(None, description="Code pays ISO (ex: FR, US)", max_length=2),
 ):
     """
     Récupère la météo actuelle pour une ville donnée.
@@ -43,21 +42,15 @@ async def get_current_weather(
             detail=f"Erreur lors de la récupération des données météo: {str(e)}",
         )
     except httpx.HTTPError as e:
-        raise HTTPException(
-            status_code=500, detail=f"Erreur de connexion à l'API météo: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Erreur de connexion à l'API météo: {str(e)}")
     except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"Erreur interne du serveur: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Erreur interne du serveur: {str(e)}")
 
 
 @router.get("/forecast", response_model=ForecastResponse)
 async def get_weather_forecast(
     city: str = Query(..., description="Nom de la ville", min_length=1),
-    country_code: Optional[str] = Query(
-        None, description="Code pays ISO (ex: FR, US)", max_length=2
-    ),
+    country_code: Optional[str] = Query(None, description="Code pays ISO (ex: FR, US)", max_length=2),
 ):
     """
     Récupère les prévisions météo sur 7 jours pour une ville donnée.
@@ -87,10 +80,6 @@ async def get_weather_forecast(
             detail=f"Erreur lors de la récupération des prévisions météo: {str(e)}",
         )
     except httpx.HTTPError as e:
-        raise HTTPException(
-            status_code=500, detail=f"Erreur de connexion à l'API météo: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Erreur de connexion à l'API météo: {str(e)}")
     except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"Erreur interne du serveur: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Erreur interne du serveur: {str(e)}")

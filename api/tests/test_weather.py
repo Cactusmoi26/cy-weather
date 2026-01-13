@@ -1,8 +1,9 @@
 from fastapi.testclient import TestClient
+
 from main import app
 
-
 client = TestClient(app)
+
 
 def test_get_current_weather():
     response = client.get("/api/weather/current?city=Paris")

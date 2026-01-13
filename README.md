@@ -1,3 +1,14 @@
+dans api
+```bash
+docker run --rm -v "${PWD}:/app" -w /app ghcr.io/astral-sh/uv:python3.10-trixie uv lock
+```
+
+pour lance test en local
+```
+docker exec -it cy-weather-api pytest
+```
+
+
 # 🌤️ CY Weather - Application Météo
 
 Application météo complète avec une API backend FastAPI et un frontend Vue.js moderne.

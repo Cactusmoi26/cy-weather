@@ -4,6 +4,9 @@ FROM ghcr.io/astral-sh/uv:python3.10-trixie
 # Install the project into `/app`
 WORKDIR /app
 
+ENV PYTHONPATH=/app
+
+
 # Enable bytecode compilation
 ENV UV_COMPILE_BYTECODE=1
 

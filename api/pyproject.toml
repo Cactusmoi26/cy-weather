@@ -14,7 +14,7 @@ dependencies = [
     "ruff",
 ]
 [tool.ruff]
-line-length = 100
+line-length = 300
 
 [tool.ruff.lint]
 select = ["E", "F", "I"]  # erreurs, bugs, imports

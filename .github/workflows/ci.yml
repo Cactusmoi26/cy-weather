@@ -21,6 +21,11 @@ jobs:
         run: |
           docker compose up -d --build api
 
+      - name: Lint (Ruff)
+        run: |
+          docker exec cy-weather-api ruff check .
+          docker exec cy-weather-api ruff format --check .
+
       - name: Run pytest inside the API container
         run: |
           docker exec cy-weather-api pytest

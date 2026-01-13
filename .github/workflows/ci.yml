@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  api-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and start API container
+        run: |
+          docker compose up -d --build api
+
+      - name: Run pytest inside the API container
+        run: |
+          docker exec cy-weather-api pytest
+
+      - name: Show API logs if tests fail
+        if: failure()
+        run: |
+          docker logs cy-weather-api --tail 200

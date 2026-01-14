@@ -31,4 +31,5 @@ EXPOSE 80
 
 # Start nginx
 ENTRYPOINT []
-CMD ["nginx", "-g", "daemon off;"]
+#CMD ["nginx", "-g", "daemon off;"]
+CMD ["sh", "-c", "fastapi run main:app --host 0.0.0.0 --port ${PORT:-8000}"]

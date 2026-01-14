@@ -40,7 +40,7 @@ jobs:
         env:
           GITHUB_PAGES: "true"
           # IMPORTANT: mets ici l'URL de ton backend quand il sera déployé (ex: https://xxx.onrender.com/api)
-          VITE_API_URL: "http://localhost:5173/"
+          VITE_API_URL: "https://cy-weather-2wco.onrender.com"
         run: npm run build
 
       - name: Upload artifact
